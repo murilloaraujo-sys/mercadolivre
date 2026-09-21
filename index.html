@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Clone Mercado Livre - Estrutura e CSS Interno</title>
+    
+    <!-- Estilização CSS interna da página -->
+    <style>
+
+        /* Estilo do container do carrossel/slide principal */
+        .slide {
+            width: 1100px;
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Formatação das imagens exibidas no carrossel */
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Estilo dos botões de navegação do carrossel */
+        .slide button {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* 1. CONFIGURAÇÕES GERAIS DO CORPO DA PÁGINA */
+        body {
+            background-color: #fff159; /* Cor amarela do cabeçalho do Mercado Livre */
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove o espaçamento padrão das bordas da página */
+        }
+
+        /* 2. CABEÇALHO E ÁREA DE BUSCA */
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Campo de texto para digitar a pesquisa */
+        .barra-busca {
+            padding: 10px;
+            width: 50%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+        
+        /* Botão para disparar a pesquisa */
+        .btn-busca {
+            padding: 10px;
+            cursor: pointer;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        /* 3. MENU DE NAVEGAÇÃO */
+        nav {
+            margin-top: 15px;
+        }
+        
+        /* Links contidos dentro do menu principal */
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        /* Modificação visual do link ao passar o ponteiro do mouse */
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Linha divisória entre o cabeçalho e o conteúdo */
+        hr {
+            border-color: #e6d94f;
+            border-style: solid;
+        }
+
+        /* 4. CONTEÚDO PRINCIPAL E BANNER DE DESTAQUE */
+        main {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        /* Subtítulo institucional do banner */
+        main h3 {
+            color: #0056b3;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+        
+        /* Título de grande destaque da promoção */
+        main h1 {
+            color: #0056b3;
+            font-size: 40px;
+            margin-top: 5px;
+        }
+        
+        /* Etiqueta indicadora do percentual de desconto */
+        .selo-desconto {
+            background-color: white;
+            color: #0056b3;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* 5. SEÇÃO DOS CARTÕES DE PRODUTOS/SERVIÇOS */
+        .secao-cards {
+            background-color: #ebebeb; /* Fundo cinza para contrastar com os cartões brancos */
+            padding: 40px;
+            text-align: center;
+        }
+        
+        /* Estrutura visual individual de cada cartão com altura padronizada */
+        .card {
+            background-color: white;
+            width: 220px;
+            height: 380px; /* Altura fixa garantindo o mesmo tamanho para todos os cards */
+            display: inline-flex; /* Flexbox inline para alinhar lado a lado e organizar o conteúdo interno */
+            flex-direction: column; /* Organiza o conteúdo em coluna (de cima para baixo) */
+            justify-content: space-between; /* Distribui o conteúdo com espaçamento uniforme */
+            align-items: center; /* Centraliza os elementos horizontalmente */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Sombreamento para efeito de elevação */
+            box-sizing: border-box; /* Inclui o padding no cálculo do tamanho total */
+            vertical-align: top; /* Alinha o topo de todos os cards na mesma linha */
+        }
+        
+        /* Título do cartão */
+        .card h4 {
+            margin: 0;
+        }
+        
+        /* Descrição interna do cartão */
+        .card p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0 10px 0;
+        }
+        
+        /* Link de ação dentro do cartão */
+        .card a {
+            color: #3483fa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* Efeito de destaque no link do cartão ao passar o mouse */
+        .card a:hover {
+            color: #2968c8;
+            text-decoration: underline;
+        }
+
+        /* Formatação da imagem grande do banner */
+        .foto-banner {
+            width: 1100px;
+            height: auto;
+            margin-right: 30px;
+            border-radius: 10px;
+        }
+
+        /* Formatação das fotos exibidas dentro dos cartões */
+        .foto-card {
+            width: 100%;
+            max-width: 180px;
+            height: 140px; /* Altura fixa para as imagens dos cards */
+            object-fit: contain; /* Mantém a proporção da imagem sem distorcer */
+            margin-bottom: 5px;
+        }
+
+        /* Container dos botões de controle de imagem do cartão */
+        .controles-card {
+            margin-bottom: 5px;
+        }
+
+        /* Botões para alternar as imagens do cartão */
+        .controles-card button {
+            cursor: pointer;
+            font-size: 18px;
+            margin: 0 5px;
+            padding: 5px 10px;
+        }
+
+        /* Seção em bloco que agrupa o painel de categorias */
+        .secao-categorias {
+            max-width: 1100px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Área de título da seção de categorias */
+        .topo-categorias {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 20px;
+        }
+
+        .topo-categorias h2 {
+            margin: 0;
+            color: #333;
+            margin-right: 15px;
+        }
+
+        /* Tabela utilizada para organizar a grade de categorias */
+        .tabela-categorias {
+            width: 100%;
+            border-collapse: separate; /* Permite controlar o espaçamento individual das células */
+            border-spacing: 50px; /* Distância entre cada bloco de categoria */
+        }
+
+        /* Célula individual contendo o ícone e a legenda da categoria */
+        .celula-categoria {
+            background-color: white;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding: 0;
+            width: 25%;
+            vertical-align: middle; /* Centralização vertical do conteúdo */
+        }
+
+        /* Bloco com fundo destacado onde fica a imagem da categoria */
+        .fundo-imagem-categoria {
+            background-color: #f5f5f5;
+            width: 80px;
+            min-height: 80px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px 0 0 4px;
+            vertical-align: middle;
+        }
+
+        /* Dimensões do ícone/foto dentro do quadrado da categoria */
+        .foto-categoria {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        /* Nome descritivo da categoria posicionado ao lado da foto */
+        .nome-categoria {
+            display: inline-block;
+            width: calc(100% - 90px); /* Preenche a largura restante da célula */
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+            padding: 10px; 
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        /* 6. RODAPÉ DA PÁGINA */
+        .rodape {
+            background-color: white;
+            margin-top: 40px;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        /* Seção central que exibe os 3 pilares de vantagens da loja */
+        .rodape-beneficios {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Cada coluna individual de benefício no rodapé */
+        .beneficio-item {
+            width: 33%; /* Divide o espaço em 3 colunas iguais */
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        /* Configuração de tamanho do ícone de pagamento */
+        .icone-beneficio {
+            width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .beneficio-item h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .beneficio-item p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .beneficio-item a {
+            color: #3483fa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Botão para expansão de termos e informações adicionais */
+        .rodape-mais-info {
+            text-align: center;
+            border-top: 1px solid #e3e3e3;
+            margin-top: -16px;
+        }
+
+        .btn-mais-info {
+            background-color: white;
+            border: 1px solid #e3e3e3;
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Seção com links institucionais e direitos autorais */
+        .rodape-legal {
+            background-color: #f5f5f5;
+            padding: 20px 0;
+            border-top: 1px solid #e3e3e3;
+            margin-top: 20px;
+        }
+
+        .links-legais {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
+        }
+
+        .links-legais a {
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            margin-right: 15px;
+        }
+
+        .texto-legal {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 12px;
+        }
+
+        .texto-legal p {
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho com logo e barra de pesquisa -->
+    <header>
+        <div>
+            <img src="logomercadolivre.jpeg" alt="Logo Mercado Livre" width="130">
+            <input type="text" class="barra-busca" placeholder="Buscar produtos, marcas e muito mais...">
+            <button class="btn-busca">🔍</button>
+        </div>
+
+        <!-- Menu com atalhos de navegação rápida -->
+        <nav>
+            <a href="#">Categorias</a>
+            <a href="#">Ofertas</a>
+            <a href="#">Histórico</a>
+            <a href="#">Supermercado</a>
+            <a href="#">Moda</a>
+            <a href="#">Vender</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- Seção de oferta em destaque da campanha -->
+    <main class="banner-destaque">
+        <img src="banner-principal.jpeg" alt="Banner principal promocional" class="foto-banner">
+        <div>
+            <h3>DIA DOS PAIS</h3>
+            <h1>O MAIOR DESCONTO PARA OS PAIS</h1>
+            <div class="selo-desconto">ATÉ 60% OFF</div>
+        </div>
+    </main>
+
+    <!-- Carrossel interativo de imagens -->
+    <section class="slide">
+        <img id="imagem-slide" src="banner1.jpeg" alt="Banner promocional rotativo">
+        <button onclick="voltarImagem()">❮</button>
+        <button onclick="avancarImagem()">❯</button>
+    </section>
+
+    <!-- Grade com cartões explicativos para o usuário -->
+    <section class="secao-cards">
+        
+        <!-- Cartão 1: Acesso à conta -->
+        <article class="card">
+            <img id="foto-card-1"
+                 src="card1.jpeg"
+                 alt="Acesso à conta"
+                 class="foto-card">
+            <div class="controles-card">
+                <button onclick="voltarCard1()">←</button>
+                <button onclick="avancarCard1()">→</button>
+            </div>
+            <h4>Entre na sua conta</h4>
+            <p>Aproveite ofertas para comprar tudo que quiser.</p>
+            <a href="#">Entrar na sua conta</a>
+        </article>
+
+        <!-- Cartão 2: Informações de entrega -->
+        <article class="card">
+            <img id="foto-card-2"
+                 src="card2.jpeg"
+                 alt="Localização e frete"
+                 class="foto-card">
+            <div class="controles-card">
+                <button onclick="voltarCard2()">←</button>
+                <button onclick="avancarCard2()">→</button>
+            </div>
+            <h4>Insira sua localização</h4>
+            <p>Confira os custos e prazos de entrega.</p>
+            <a href="#">Inserir localização</a>
+        </article>
+
+        <!-- Cartão 3: Formas de pagamento -->
+        <article class="card">
+            <img id="foto-card-3"
+                 src="card3.jpeg"
+                 alt="Meios de pagamento"
+                 class="foto-card">
+            <div class="controles-card">
+                <button onclick="voltarCard3()">←</button>
+                <button onclick="avancarCard3()">→</button>
+            </div>
+            <h4>Meios de pagamento</h4>
+            <p>Pague suas compras com rapidez e segurança.</p>
+            <a href="#">Mostrar meios</a>
+        </article>
+
+        <!-- Cartão 4: Ofertas de menor valor -->
+        <article class="card">
+            <img id="foto-card-4"
+                 src="card4.jpeg"
+                 alt="Produtos em promoção"
+                 class="foto-card">
+            <div class="controles-card">
+                <button onclick="voltarCard4()">←</button>
+                <button onclick="avancarCard4()">→</button>
+            </div>
+            <h4>Menos de R$100</h4>
+            <p>Confira produtos com preços baixos.</p>
+            <a href="#">Mostrar produtos</a>
+        </article>
+
+    </section>
+    
+    <!-- Painel organizado em tabela com os setores da loja -->
+    <section class="secao-categorias">
+
+        <div class="topo-categorias">
+            <h2>Categorias</h2>
+        </div>
+
+        <table class="tabela-categorias">
+            <!-- Primeira linha de setores -->
+            <tr>
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="carro.jpeg" alt="Veículos" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Carros, Motos e Outros</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="celular.jpeg" alt="Smartphones" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Celulares e Telefones</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="maquina.jpeg" alt="Eletrodomésticos" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Eletrodoméstico</span>
+                </td>
+                
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="ferramentas.jpeg" alt="Ferramentas" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Ferramentas</span>
+                </td>
+            </tr>
+
+            <!-- Segunda linha de setores -->
+            <tr>
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="pneu.jpeg" alt="Autopeças" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Acessorios para carros</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="vestido.jpeg" alt="Vestuário" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Calçados, roupas e Bolsas</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="peso-academia.jpeg" alt="Equipamentos esportivos" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Esporte e fitness </span>
+                </td>
+                
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="Perfume.jpeg" alt="Produtos de beleza" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Beleza e Cuidado Pessoal</span>
+                </td>
+            </tr>
+
+            <!-- Terceira linha de setores -->
+            <tr>
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="cadeira.jpeg" alt="Móveis" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Casa, móveis e Decoração</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="notebook.jpeg" alt="Informática" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Informática</span>
+                </td>
+
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="casa.jpeg" alt="Imóveis" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Imóveis</span>
+                </td>
+                
+                <td class="celula-categoria">
+                    <div class="fundo-imagem-categoria">
+                        <img src="fone.jpeg" alt="Eletrônicos" class="foto-categoria">
+                    </div>
+                    <span class="nome-categoria">Eletrônicos, Áudio e Vídeo</span>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Rodapé informativo e legal do site -->
+    <footer class="rodape">
+        <!-- Lista de vantagens para o comprador -->
+        <section class="rodape-beneficios">
+            <article class="beneficio-item">
+                <img src="cartao.jpeg" alt="Ícone de cartão de crédito" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+
+            <article class="beneficio-item">
+                <img src="cartao.jpeg" alt="Ícone de cartão de crédito" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+
+            <article class="beneficio-item">
+                <img src="cartao.jpeg" alt="Ícone de cartão de crédito" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+        </section>
+
+        <!-- Botão de suporte para carregar mais dados -->
+        <div class="rodape-mais-info">
+            <button class="btn-mais-info">Mais Informações</button>
+        </div>
+
+        <!-- Links institucionais e dados do CNPJ -->
+        <section class="rodape-legal">
+            <div class="links-legais">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos e Condições</a>
+                <a href="#">Promoções</a>
+                <a href="#">Como Cuidamos da sua Privacidade</a>
+                <a href="#">Contato</a>
+            </div>
+            <div class="texto-legal">
+                <p>Copyright © 1999-2026 Mercado Livre Brasil Ltda.</p>
+                <p>CNPJ n.º 03.007.331/0001-41 / Av. das Nações Unidas, nº 3.003, Bonfim, Osasco/SP - CEP 06233-903 - empresa do grupo Mercado Livre.</p>
+            </div>
+        </section>
+    </footer>
+
+    <!-- Script de dinamismo das imagens do slide e dos cartões -->
+    <script>
+
+        // Lista de imagens utilizadas pelo carrossel principal
+        let imagens = [
+            "banner1.jpeg",
+            "banner2.jpeg",
+            "banner3.jpeg",
+            "banner4.jpeg"
+        ];
+
+        // Índice que armazena o banner exibido atualmente
+        let imagemAtual = 0;
+
+        // Função responsável por avançar para o próximo banner do carrossel
+        function avancarImagem() {
+            imagemAtual = imagemAtual + 1;
+
+            if (imagemAtual >= imagens.length) {
+                imagemAtual = 0;
+            }
+
+            document.getElementById("imagem-slide").src = imagens[imagemAtual];
+        }
+
+        // Função responsável por retroceder o banner no carrossel
+        function voltarImagem() {
+            imagemAtual = imagemAtual - 1;
+
+            if (imagemAtual < 0) {
+                imagemAtual = imagens.length - 1;
+            }
+
+            document.getElementById("imagem-slide").src = imagens[imagemAtual];
+        }
+
+        // Temporizador que troca o banner a cada 5 segundos
+        setInterval(avancarImagem, 5000);
+
+        // Lista de imagens alternativas do Cartão 1
+        let imagensCard1 = [
+            "card1.jpeg",
+            "preco.svg"
+        ];
+        let card1Atual = 0;
+
+        function avancarCard1() {
+            card1Atual = card1Atual + 1;
+            if (card1Atual >= imagensCard1.length) {
+                card1Atual = 0;
+            }
+            document.getElementById("foto-card-1").src = imagensCard1[card1Atual];
+        }
+
+        function voltarCard1() {
+            card1Atual = card1Atual - 1;
+            if (card1Atual < 0) {
+                card1Atual = imagensCard1.length - 1;
+            }
+            document.getElementById("foto-card-1").src = imagensCard1[card1Atual];
+        }
+
+        // Lista de imagens alternativas do Cartão 2
+        let imagensCard2 = [
+            "card2.jpeg",
+            "preco.svg"
+        ];
+        let card2Atual = 0;
+
+        function avancarCard2() {
+            card2Atual = card2Atual + 1;
+            if (card2Atual >= imagensCard2.length) {
+                card2Atual = 0;
+            }
+            document.getElementById("foto-card-2").src = imagensCard2[card2Atual];
+        }
+
+        function voltarCard2() {
+            card2Atual = card2Atual - 1;
+            if (card2Atual < 0) {
+                card2Atual = imagensCard2.length - 1;
+            }
+            document.getElementById("foto-card-2").src = imagensCard2[card2Atual];
+        }
+
+        // Lista de imagens alternativas do Cartão 3
+        let imagensCard3 = [
+            "card3.jpeg",
+            "preco.svg"
+        ];
+        let card3Atual = 0;
+
+        function avancarCard3() {
+            card3Atual = card3Atual + 1;
+            if (card3Atual >= imagensCard3.length) {
+                card3Atual = 0;
+            }
+            document.getElementById("foto-card-3").src = imagensCard3[card3Atual];
+        }
+
+        function voltarCard3() {
+            card3Atual = card3Atual - 1;
+            if (card3Atual < 0) {
+                card3Atual = imagensCard3.length - 1;
+            }
+            document.getElementById("foto-card-3").src = imagensCard3[card3Atual];
+        }
+
+        // Lista de imagens alternativas do Cartão 4
+        let imagensCard4 = [
+            "card4.jpeg",
+            "preco.svg"
+        ];
+        let card4Atual = 0;
+
+        function avancarCard4() {
+            card4Atual = card4Atual + 1;
+            if (card4Atual >= imagensCard4.length) {
+                card4Atual = 0;
+            }
+            document.getElementById("foto-card-4").src = imagensCard4[card4Atual];
+        }
+
+        function voltarCard4() {
+            card4Atual = card4Atual - 1;
+            if (card4Atual < 0) {
+                card4Atual = imagensCard4.length - 1;
+            }
+            document.getElementById("foto-card-4").src = imagensCard4[card4Atual];
+        }
+
+    </script>
+
+</body>
+</html>
